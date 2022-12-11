@@ -1,0 +1,69 @@
+{
+    "label": "apostila",
+    "idTipoDocumento": 46,
+    "shortName": "Apostila",
+    "longName": "Apostila",
+    "nupType": "SEM_NUP",
+    "generateNUP": false,
+    "formatoNumeracao": null,
+    "formRows": [
+        {
+            "description": "Assunto / Data",
+            "fields": [
+                {
+                    "fieldName": "documentoTitulo",
+                    "fieldWidth": 8,
+                    "fieldPlaceholder": "Assunto/ Título do documento",
+                    "fieldHelpText": "",
+                    "fillType": "USER_PROVIDED",
+                    "fieldType": "text"
+                },
+                {
+                    "fieldName": "documentoData",
+                    "fieldWidth": 4,
+                    "fieldPlaceholder": "",
+                    "fieldHelpText": "",
+                    "fillType": "SYSTEM_PROVIDED_EDITABLE",
+                    "fieldType": "date"
+                }
+            ]
+        },
+        {
+            "description": "Texto",
+            "fields": [
+                {
+                    "fieldName": "documentoMensagem",
+                    "fieldWidth": 12,
+                    "fieldPlaceholder": "",
+                    "fieldHelpText": "",
+                    "fillType": "USER_PROVIDED",
+                    "parentRow": 8,
+                    "fieldType": "markdown"
+                }
+            ]
+        },
+        {
+            "description": "Identificação do signatário",
+            "fields": [
+                {
+                    "fieldName": "autorNomeFuncao",
+                    "fieldWidth": 6,
+                    "fieldPlaceholder": "Nome do signatário",
+                    "fieldHelpText": "",
+                    "fillType": "USER_PROVIDED",
+                    "choiceOptions": [],
+                    "fieldType": "signatario"
+                },
+                {
+                    "fieldName": "autorNoImpedimento",
+                    "fieldWidth": 6,
+                    "fieldPlaceholder": "Nome do Signatário no Impedimento",
+                    "fieldHelpText": "",
+                    "fillType": "USER_PROVIDED",
+                    "choiceOptions": [],
+                    "fieldType": "pessoa_interna"
+                }
+            ]
+        }
+    ]
+}

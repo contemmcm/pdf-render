@@ -1,0 +1,432 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{fabdoc}[2021/02/02 FABDoc package]
+
+\usepackage[brazil]{babel}
+\usepackage[none]{hyphenat}
+\usepackage{scrextend}
+\usepackage{graphicx}
+\usepackage[usestackEOL]{stackengine}
+\usepackage{tabto}
+\usepackage{longtable,booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{epstopdf}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{etoolbox}
+\usepackage{xifthen}
+\usepackage{pgffor}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=2cm,headheight=100pt,headsep=12pt]{geometry} % Margens "includefoot" caso tenha problema de margens
+\usepackage{fancyhdr}
+\usepackage[lastpage,user]{zref}
+\usepackage{stringstrings}
+\usepackage{ragged2e}
+\usepackage{tabularx}
+\usepackage{listings}
+
+% Variaveis Gerais
+\newcommand*{\orgao}[1]{\def\fromorganization{#1}}
+\newcommand*{\unidadeAdministrativaRaizNome}[1]{\def\fromrootorganizationunit{#1}}
+\newcommand*{\unidadeAdministrativaRaizSigla}[1]{\def\fromrootorganizationunitacronym{#1}}
+\newcommand*{\unidadeAdministrativaCidade}[1]{\def\fromcity{#1}}
+\newcommand*{\unidadeAdministrativaNome}[1]{\def\fromorganizationunit{#1}}
+\newcommand*{\unidadeAdministrativaSigla}[1]{\def\fromorganizationunitacronym{#1}}
+\newcommand*{\autorNome}[1]{\def\fromname{#1}}
+\newcommand*{\autorFuncao}[1]{\def\fromtitle{#1}}
+\newcommand*{\autorNomeFuncao}[1]{\def\fromnametitle{#1}}
+\newcommand*{\autorNoImpedimento}[1]{\def\fromnameimp{#1}}
+\newcommand*{\documentoData}[1]{\def\docdate{#1}}
+\newcommand*{\documentoNup}[1]{\def\docnup{#1}}
+\newcommand*{\unidadeAdministrativaSetor}[1]{\def\fromorganizationsector{#1}}
+\newcommand*{\nupDependente}[1]{\def\nupdep{#1}}
+\newcommand*{\marcaDagua}[1]{\def\watermark{#1}}
+
+\newcommand*{\opening}[1]{{\everypar={}\parindent=2.5cm #1}\vspace{14pt}}
+\newcommand*{\closing}[1]{\vspace{6pt}\everypar={}{\parindent=2.5cm #1}}
+
+\renewcommand\normalsize{\fontsize{12pt}{14pt}\selectfont}
+
+% Escapa caracteres especiais
+\let\code\lstinline
+
+% Força as figuras e tabelas a serem inseridas onde o usuário colocou
+\usepackage{float}
+\floatplacement{figure}{H}
+
+% Pandoc
+\usepackage{calc}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            colorlinks=true,
+            linkcolor=maroon,
+            citecolor=blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{0pt}
+\itemsep = \z@ % add nothing to \parskip between items
+\topsep = \z@ % add nothing to \parskip before first item
+
+\sloppy
+\parindent=0pt
+\pdfminorversion=7
+
+
+%% Lista simbolos Comemorativos
+\newcommand{\listSimbCom}[1]{#1 }%
+\newcommand{\printSimbCom}[1]{\forlistloop{\listSimbCom}{#1 }}%
+
+\newcommand{\simbolosComemorativos}[1]{%
+    \ifdefined\aboveL\def\aboveText{}\fi
+    \ifdefined\aboveC\def\aboveText{}\fi
+    \ifdefined\aboveR\def\aboveText{}\fi
+    \ifdefined\belowL\def\belowText{}\fi
+    \ifdefined\belowC\def\belowText{}\fi
+    \ifdefined\belowR\def\belowText{}\fi
+    \ifdefined\signatureL\def\signature{}\fi
+    \ifdefined\signatureC\def\signature{}\fi
+    \ifdefined\signatureR\def\signature{}\fi
+
+    \ifthenelse{\equal{#1}{acimaTexto}}{
+        \ifdefined\aboveText
+            \vspace{20pt}
+            \ifx\aboveL\undefined\def\aboveL{}\fi
+            \ifx\aboveC\undefined\def\aboveC{}\fi
+            \ifx\aboveR\undefined\def\aboveR{}\fi
+            \noindent\printSimbCom{\aboveL}
+            \hfill\printSimbCom{\aboveC}
+            \hfill\printSimbCom{\aboveR}
+        \fi
+    }
+
+    \ifthenelse{\equal{#1}{abaixoTexto}}{
+        \ifdefined\belowText
+            \vspace{20pt}
+            \ifx\belowL\undefined\def\belowL{}\fi
+            \ifx\belowC\undefined\def\belowC{}\fi
+            \ifx\belowR\undefined\def\belowR{}\fi
+            \noindent\printSimbCom{\belowL}
+            \hfill\printSimbCom{\belowC}
+            \hfill\printSimbCom{\belowR}
+        \fi
+    }
+
+    \ifthenelse{\equal{#1}{signature}}{
+        \ifdefined\signature
+            \vspace{20pt}\\
+            \multicolumn{1}{@{} c @{}}{
+            \ifx\signatureL\undefined\def\signatureL{}\fi
+            \ifx\signatureC\undefined\def\signatureC{}\fi
+            \ifx\signatureR\undefined\def\signatureR{}\fi
+                \noindent\printSimbCom{\signatureL}
+                \hfill\printSimbCom{\signatureC}
+                \hfill\printSimbCom{\signatureR}
+            }
+        \fi
+    }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Marca D'água %%%%%%%%%%%%%
+
+\ifdefined\marcaDagua
+    \usepackage{amsmath}
+    \usepackage{draftwatermark}
+    \SetWatermarkText{\shortstack{
+    \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark \\ [10em]
+    \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt}  \watermark \\ [10em]
+    \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark \\ [10em]
+    \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark \\ [10em]
+    \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark \\ [10em]
+    \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark\hspace{1000pt} \watermark}}
+    \SetWatermarkScale{0.1}
+    \definecolor{wmc}{rgb}{1,0.8,0.8}
+    \SetWatermarkColor{wmc}
+    \SetWatermarkAngle{40}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Cabeçalho e rodapé %%%%%%%%%%%%%
+
+\pagestyle{fancy}
+\newcommand*{\footer}{\vspace*{-12pt}\justify\fromaddress\ - \fromcity\ - \fromstate\ - CEP \nolinebreak \frompostalcode\ Tel: \nolinebreak \nolinebreak[8]\telephonenum/Fax: \nolinebreak \faxnum\ - E-mail:\nolinebreak \fromemail}
+
+\renewcommand{\headrulewidth}{0pt} % Tamanho da linha do cabeçalho
+\renewcommand{\footrulewidth}{0pt} % Tamanho da linha do Rodapé
+\fancyhf{}
+
+\fancypagestyle{rodape}{%
+\fancyhf{}% clear all header and footer fields
+\fancyfoot[L]{\footer}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Timbres %%%%%%%%%%%%%%%%%%%
+
+\newcommand{\timbreCinco}{%
+    \begin{center}
+    \includegraphics[width=20mm, height=20mm]{images/armas}
+
+    \vspace{6pt}
+    \textbf{\fromorganization}
+
+    \fromrootorganizationunit
+
+    \ifx\fromorganizationunit\undefined
+        \ifdefined\fromorganizationsector\centSub{\fromorganizationsector}\fi
+        \end{center}
+    \else
+        \centSub{\fromorganizationunit}
+        \ifdefined\fromorganizationsector\centSub{\fromorganizationsector}\fi
+        \end{center}
+    \fi
+}
+
+\newcommand{\timbreSete}{%
+    \textbf{\fromorganization} - \fromrootorganizationunit\
+    \ifdefined\fromorganizationunit- \fromorganizationunit\fi
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Comandos customizados %%%%%%%%%%%%
+
+% Usado para apresentar lista
+\newcommand{\printlist}[3][\\]{{% Print list
+    \def\listsep{\def\listsep{#1}}% Delayed execution of list separator
+    \renewcommand{\do}[1]{\listsep##1}%
+    \dolistloop#3
+}}
+
+
+
+% Usado no \p
+\newcommand{\parnum}{\arabic{parcount}.}
+\newcounter{parcount}
+\newcommand\p{%
+    \stepcounter{parcount}%
+    \parnum\tabto{2.5cm}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Assinaturas %%%%%%%%%%%%%%%%%
+
+% Assiatura COM Data (\assinaturaComData)
+\newcommand{\assinaturaComData}{%
+\everypar={}
+\simbolosComemorativos{abaixoTexto}
+
+
+\vspace{20pt}\hfill
+\fromcity, \docdate.
+
+\nopagebreak
+\vspace{40pt}
+\noindent\hfill
+\begin{tabular}{@{} c @{}} % Remove os espaços da tabela
+    \ifthenelse{\equal{\fromnameimp}{}}%
+    {\fromnametitle}
+    {No~Imp~\fromnametitle \\ \\ \fromnameimp}
+
+\simbolosComemorativos{signature}
+
+\end{tabular}
+}
+
+
+% Assinatura SEM Data (\assinaturaSemData)
+\newcommand{\assinaturaSemData}{%
+\everypar={}
+\simbolosComemorativos{abaixoTexto}
+
+\nopagebreak
+\vspace{40pt}
+\noindent\hfill
+\begin{tabular}{@{} c @{}} % Remove os espaços da tabela
+    \ifthenelse{\equal{\fromnameimp}{}}%
+    {\fromnametitle}
+    {No~Imp~\fromnametitle \\ \\ \fromnameimp}
+
+\simbolosComemorativos{signature}
+
+\end{tabular}
+}
+
+\newcommand{\assinaturaPessoalSemData}{%
+\everypar={}
+\simbolosComemorativos{abaixoTexto}
+
+\nopagebreak
+\vspace{40pt}
+\noindent\hfill
+\begin{tabular}{@{} c @{}} % Remove os espaços da tabela
+    \ifthenelse{\equal{\fromnameimp}{}}%
+    {\fromname}
+    {No~Imp~\fromname \\ \\ \fromnameimp}
+
+\simbolosComemorativos{signature}
+
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Corpo do Texto %%%%%%%%%%%%%%%%
+
+% Corpo do Texto sem parágrafo
+\newcommand{\texto}{%
+
+\lista{Referência:}{\documentoReferencias}
+
+
+\lista{Anexo:}{\documentoAnexos}
+
+
+\simbolosComemorativos{acimaTexto}
+
+
+\vspace{20pt}
+\setlength{\parskip}{6pt}
+\vspace{-\parskip} % Remove o espaçamento extra na primeira linha do texto
+\parindent=0cm
+}
+
+
+% Corpo do Texto com parágrafo
+\newcommand{\textoIndentado}{%
+
+\lista{Referência:}{\documentoReferencias}
+
+
+\lista{Anexo:}{\documentoAnexos}
+
+
+\simbolosComemorativos{acimaTexto}
+
+
+\vspace{20pt}
+\setlength{\parskip}{6pt}
+\vspace{-\parskip} % Remove o espaçamento extra na primeira linha do texto
+\parindent=2.5cm
+}
+
+
+% Corpo do Texto numerado
+\newcommand{\textoNumerado}{%
+
+\lista{Referência:}{\documentoReferencias}
+
+
+\lista{Anexo:}{\documentoAnexos}
+
+
+\simbolosComemorativos{acimaTexto}
+
+
+\vspace{20pt}
+\setlength{\parskip}{6pt}
+\vspace{-\parskip} % Remove o espaçamento extra na primeira linha do texto
+\parindent=0cm
+\everypar={\p}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Ementa
+\newcommand{\ementa}[1]{%
+\vspace{20pt}
+\begin{addmargin}[9cm]{0cm}
+#1
+\end{addmargin}
+}
+
+
+% Autoria e fundamento legal
+\newcommand{\autoriaFundamento}[1]{%
+\vspace{20pt}
+\tabto{2.5cm}#1
+}
+
+% Centraliza o texto
+\newcommand{\centralizado}[1]{%
+\begin{center}
+#1
+\end{center}
+}
+
+
+% Sublinha o texto
+\newcommand{\sublinhado}[1]{%
+\underline{\smash{#1}}
+}
+
+
+% Centraliza e sublinha o texto
+\newcommand{\centSub}[1]{%
+\begin{center}
+\underline{\smash{#1}}
+\end{center}
+}
+
+
+% Lista de destinatários
+\newcommand{\destinatarios}[2]{%
+\ifdef{#2}{%
+#1\
+\begin{minipage}[t]{0.95\linewidth}
+\printlist{
+
+}{#2}
+\end{minipage}
+}}
+
+
+% Lista{nome}{Variavel}
+\newcommand{\lista}[2]{%
+\ifdef{#2}{%
+\vspace{12pt}
+#1\ \tabto{2.5cm}
+\begin{minipage}[t]{0.84\linewidth}
+\printlist{
+
+}{#2}
+\vspace{5pt}
+\end{minipage}
+}}
+
+
+% Se o usuário não chamar o comando \signatarioNoImp{...}, definir como vazio
+\ifx\fromnameimp\undefined
+    \def\fromnameimp{}
+\fi
+
+\ifx\fromtitle\undefined
+    \def\fromtitle{}
+\fi
+
+\ifx\fromname\undefined
+    \def\fromname{}
+\fi
+
+\ifx\fromnametitle\undefined
+    \def\fromnametitle{}
+\fi
+
+\ifx\fromorganizationunitacronym\undefined
+    \def\fromorganizationunitacronym{}
+\fi
+
+\ifx\watermark\undefined
+    \def\watermark{}
+\fi

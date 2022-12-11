@@ -1,0 +1,26 @@
+{
+    "search.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/venv": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.pyc": {
+            "when": "$(basename).py"
+        },
+        "**/__pycache__": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "venv/**": true,
+    },
+    "files.trimTrailingWhitespace": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": true,
+}

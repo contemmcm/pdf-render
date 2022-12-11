@@ -1,0 +1,87 @@
+[
+    {
+        "fieldName": "orgao",
+        "fieldPlaceholder": "Órgão",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": "Ministério da Defesa"
+    },
+    {
+        "fieldName": "unidadeAdministrativaRaizNome",
+        "fieldPlaceholder": "Unidade Administrativa Raiz",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": "Comando da Aeronáutica"
+    },
+    {
+        "fieldName": "unidadeAdministrativaRaizSigla",
+        "fieldPlaceholder": "Unidade Administrativa Raiz (Sigla)",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": "COMAER"
+    },
+    {
+        "fieldName": "unidadeAdministrativaNome",
+        "fieldPlaceholder": "Unidade Administrativa (Nome)",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": "Centro de Computação da Aeronáutica de São José dos Campos"
+    },
+    {
+        "fieldName": "unidadeAdministrativaSigla",
+        "fieldPlaceholder": "Unidade Administrativa (Sigla)",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": "CCA-SJ"
+    },
+    {
+        "fieldName": "unidadeAdministrativaCidade",
+        "fieldPlaceholder": "Cidade",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": "São José dos Campos"
+    },
+    {
+        "fieldName": "unidadeAdministrativaSetor",
+        "fieldPlaceholder": "UnidadeAdministrativa (Setor)",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": "Seção de Arquitetura e Implantação"
+    },
+    {
+        "fieldName": "documentoAnexos",
+        "fieldPlaceholder": "Anexos",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text_list"
+    },
+    {
+        "fieldName": "documentoReferencias",
+        "fieldPlaceholder": "Referências",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text_list"
+    },
+    {
+        "fieldName": "carimbo",
+        "fieldPlaceholder": "Carimbo",
+        "fieldHelpText": "",
+        "fillType": "SYSTEM_PROVIDED",
+        "fieldType": "text_list"
+    },
+    {
+        "fieldName": "marcaDagua",
+        "fieldPlaceholder": "marcaDagua",
+        "fieldHelpText": "",
+        "fillType": "USER_PROVIDED",
+        "fieldType": "text",
+        "fieldExample": ""
+    }
+]

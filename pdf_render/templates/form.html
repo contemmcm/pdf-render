@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>PDF Worker</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>{{ doc_template.longName }}</h2>
+        <hr>
+
+        <form action="/render/{{ label }}" method="post">
+            {% for formRow in doc_template.formRows%}
+                {% for field in formRow.fields %}
+                <div class="form-group">
+                    <label>{{field.fieldName}}</label>
+                    {% if field.fieldType == 'text' %}
+                    <input type="text" class="form-control" name="{{field.fieldName}}">
+                    {% elif field.fieldType == 'text_list' %}
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    {% elif field.fieldType == 'textarea' %}
+                    <textarea class="form-control" rows="4" name="{{field.fieldName}}"></textarea>
+                    {% elif field.fieldType == 'markdown' %}
+                    <textarea class="form-control" rows="10" name="{{field.fieldName}}"></textarea>
+                    {% elif field.fieldType == 'date' %}
+                    <input type="text" class="form-control" name="{{field.fieldName}}" placeholder="DD/MM/AAAA">
+                    {% elif field.fieldType == 'select' %}
+                        {%if field.choiceOptions != null%}
+                            <select name={{field.fieldName}} id={{field.fieldName}}>
+                                {% for choice in field.choiceOptions %}
+                                <option value={{choice}}>{{choice}}</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <select name={{child.fieldName}} id={{child.fieldName}}>
+                                <option value="Cadastre as opções no sigad_manager">"Cadastre as opções no sigad_manager"</option>
+                            </select>
+                        {% endif %}
+                    {% elif field.fieldType == 'group_list' %}
+                        {% for child in field.fields %}
+                        <div class="form-group">
+                        <br><label>{{child.fieldName}}</label>
+                        <input type="text" class="form-control" name="{{child.fieldName}}[]">
+                        <input type="text" class="form-control" name="{{child.fieldName}}[]">
+                        <input type="text" class="form-control" name="{{child.fieldName}}[]">
+                        <input type="text" class="form-control" name="{{child.fieldName}}[]">
+                        {% if child.fieldDescription %}
+                        <small class="form-text text-muted">{{ child.fieldDescription }}</small>
+                        {% endif %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <input type="text" class="form-control" name="{{field.fieldName}}">
+                    {% endif %}
+
+                    {% if field.fieldDescription %}
+                    <small class="form-text text-muted">{{ field.fieldDescription }}</small>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% endfor %}
+            <hr>
+            <h4>Common Fields</h4>
+            <div class="form-group">
+                {% for field in doc_template.commonFields %}
+                    <br><label>{{field.fieldName}}</label>
+
+                    {% if field.fieldType == 'text_list' %}
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    <input type="text" class="form-control" name="{{field.fieldName}}[]">
+                    {% else %}
+                    <input type="text" class="form-control" name="{{field.fieldName}}" value="{{field.fieldExample}}">
+                    {% endif %}
+
+                    {% if field.fieldDescription %}
+                    <small class="form-text text-muted">{{ field.fieldDescription }}</small>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary">Submit</button><br><br>
+        </form>
+
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

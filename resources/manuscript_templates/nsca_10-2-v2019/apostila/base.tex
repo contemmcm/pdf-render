@@ -1,0 +1,72 @@
+\documentclass{apostila}
+
+\usepackage{enumitem}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlist[enumerate,1]{leftmargin=3.0cm}
+
+\orgao{\VAR{orgao}}
+\unidadeAdministrativaRaizNome{\VAR{unidadeAdministrativaRaizNome}}
+\unidadeAdministrativaSigla{\VAR{unidadeAdministrativaSigla}}
+\unidadeAdministrativaCidade{\VAR{unidadeAdministrativaCidade}}
+\documentoData{\VAR{documentoData}}
+\autorNomeFuncao{\VAR{autorNomeFuncao}}
+\autorNoImpedimento{\VAR{autorNoImpedimento}}
+\marcaDagua{\VAR{marcaDagua}}
+
+% Referências
+\BLOCK{for referencia in documentoReferencias}
+\listadd{\documentoReferencias}{\VAR{referencia}}
+\BLOCK{endfor}
+
+% Anexos
+\BLOCK{for anexo in documentoAnexos}
+\listadd{\documentoAnexos}{\VAR{anexo}}
+\BLOCK{endfor}
+
+% Simbolos Comemorativos
+\BLOCK{for simbolo in aboveL}
+\listadd{\aboveL}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in aboveC}
+\listadd{\aboveC}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in aboveR}
+\listadd{\aboveR}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in belowL}
+\listadd{\belowL}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in belowC}
+\listadd{\belowC}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in belowR}
+\listadd{\belowR}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in signatureL}
+\listadd{\signatureL}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in signatureC}
+\listadd{\signatureC}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\BLOCK{for simbolo in signatureR}
+\listadd{\signatureR}{\includegraphics[width=2cm,height=2cm,keepaspectratio]{\VAR{simbolo}}}
+\BLOCK{endfor}
+
+\begin{document}
+
+\begin{apostila}
+
+\VAR{documentoMensagem}
+
+\end{apostila}
+
+\end{document}
